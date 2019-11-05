@@ -101,6 +101,12 @@ Additional configuration options which will be passed to [`webpack-dev-middlewar
 You can `disable` webpack-hot-middleware if you set this option `false`.
 If it is an `object` it will be passed to [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware#config).
 
+### cb
+`{function}` `optional`
+
+Callback that gets executed when the compiler bundle is valid, typically after compilation.
+It will be passed to `waitUntilValid` of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware#waituntilvalidcallback).
+
 ## Multi compiler mode
 In multi compiler mode you must pass the `webpackDev.publicPath` option to the plugin.
 

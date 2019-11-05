@@ -13,7 +13,7 @@ function fastifyWebpack (instance, opts, next) {
     )
   }
 
-  let { compiler, config, webpackDev = {}, webpackHot = {} } = opts
+  let { compiler, config, webpackDev = {}, webpackHot = {}, cb } = opts
 
   if (!compiler) {
     if (typeof config !== 'object' && !Array.isArray(config)) {
@@ -42,6 +42,12 @@ function fastifyWebpack (instance, opts, next) {
   }
 
   const dev = webpackDevMiddleware(compiler, webpackDev)
+  
+  if (cb) {
+    dev.waitUntilValid(() => {
+      cb();
+    });
+  }
   instance.use(dev)
 
   let hot = null

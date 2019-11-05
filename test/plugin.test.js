@@ -181,3 +181,22 @@ test('Throws if webpackDev.publicPath option not explicitly defined in multi com
     )
   })
 })
+
+test('Calls the callback option if it is provided', t => {
+  t.plan(1)
+
+  const opts = {
+    config: {
+      mode: 'development',
+      entry: WEBPACK_ENTRY,
+      stats: false,
+      output: { filename: 'main.js', publicPath: '/assets' }
+    },
+    webpackDev: { logLevel: 'silent' },
+    cb: () => {
+      t.pass()
+    }
+  }
+
+  register(t, opts, () => {})
+})
